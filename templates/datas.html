@@ -1,0 +1,112 @@
+  <!-- serach bar -->
+  <div class="w-full">
+    {% if catagoryname == 'organic' %}
+    <form action="{% url 'organic:search' %}" method="" class="">
+        {% csrf_token %}
+
+      <input type="text" class="form-control  w-[300px]" name="query" placeholder="search in {{catagoryname}}..."
+      aria-label="Recipient's username" aria-describedby="button-addon2" required>
+  <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">search</button>
+
+    </form>
+    {% elif catagoryname == 'inorganic' %}
+    <form action="{% url 'inorganic:search' %}" method="">
+        {% csrf_token %}
+        <input type="text" class="form-control w-[300px]" name="query" placeholder="search in {{catagoryname}}..."
+            aria-label="Recipient's username" aria-describedby="button-addon2" required>
+        <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">search</button>
+    </form>
+    {% elif catagoryname == 'solvents' %}
+    <form action="{% url 'solvents:search' %}" method="">
+        {% csrf_token %}
+        <input type="text" class="form-control w-[300px]" name="query" placeholder="search in {{catagoryname}}..."
+            aria-label="Recipient's username" aria-describedby="button-addon2" required>
+        <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">search</button>
+    </form>
+    {% endif %}
+</div>
+<div class="flex flex-col">
+    <div class="overflow-auto">
+      <div class="py-5 inline-block min-w-[100%] min-h-[100%] h-auto sm:px-6">
+        <div class="overflow-auto">
+          <table class="min-w-full">
+            <thead class="bg-white border-b">
+              {% if elems|length == 0 %}
+            <p class="text-center text-slate-600">No items available</p>
+              {% else %}
+              <tr>
+                <th scope="col" class="text-sm font-medium text-red-600 px-6 py-4 text-left">
+                  No
+                </th>
+                <th scope="col" class="text-sm font-medium text-red-600 px-6 py-4 text-left">
+                  Name
+                </th>
+                <th scope="col" class="text-sm font-medium text-red-600 px-6 py-4 text-left">
+                  Company
+                </th>
+                <th scope="col" class="text-sm font-medium text-red-600 px-6 py-4 text-left">
+                  Quantity
+                </th>
+                <th scope="col" class="text-sm font-medium text-red-600 px-6 py-4 text-left">
+                  Pice
+                </th>
+                <th scope="col" class="text-sm font-medium text-red-600 px-6 py-4 text-left">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in elems %}
+              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">{{i.id}}</td>
+                <td class="text-sm text-gray-900 font-semibold px-6 py-2 whitespace-nowrap">
+                  {{i.name}}
+                </td>
+                <td class="text-sm text-gray-900 font-semibold px-6 py-2 whitespace-nowrap">
+                  {{i.company}}
+                </td>
+                <td class="text-sm text-gray-900 font-semibold px-6 py-2 whitespace-nowrap">
+                  {{i.qty}}
+                </td>
+                <td class="text-sm text-gray-900 font-semibold px-6 py-2 whitespace-nowrap">
+                  {{i.price}}
+                </td>
+
+                <td>
+                    {% if catagoryname == 'organic' %}
+
+                    <a href="{% url 'organic:update' i.id %}">
+                       <i class="fa-solid fa-pen p-3 rounded-full hover:bg-zinc-200"></i>
+                    </a>
+                    <a href="{% url 'organic:delete' i.id %}">
+                        <i class="fa-solid fa-delete-left p-3 rounded-full hover:bg-zinc-200"></i>
+                     </a>
+    
+                    {% elif catagoryname == 'inorganic' %}
+                    <a href="{% url 'inorganic:update' i.id %}">
+                        <i class="fa-solid fa-pen p-3 rounded-full hover:bg-zinc-200"></i>
+                     </a>
+                     <a href="{% url 'inorganic:delete' i.id %}">
+                         <i class="fa-solid fa-delete-left p-3 rounded-full hover:bg-zinc-200"></i>
+                      </a>
+    
+                    {% elif catagoryname == 'solvents' %}
+                    <a href="{% url 'solvents:update' i.id %}">
+                        <i class="fa-solid fa-pen p-3 rounded-full hover:bg-zinc-200"></i>
+                     </a>
+                     <a href="{% url 'solvents:delete' i.id %}">
+                         <i class="fa-solid fa-delete-left p-4 rounded-full hover:bg-zinc-200"></i>
+                      </a>
+                    {% endif %}
+                </td>
+             
+              </tr>
+             {% endfor %}
+           {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- serach bar -->

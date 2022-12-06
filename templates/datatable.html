@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if query %}
+
+{% include 'datas.html' %}
+{% else %}
+<div class="flex-col w-[100%]  h-screen">
+    <div class="w-[100%] h-1/6 ml-5">
+        <h1 class="text-3xl font-semibold">{{catagoryname}}</h1>
+        <div class="">
+    
+            {% if catagoryname == 'organic' %}
+        
+            
+            <a href="{% url 'organic:add' %}">
+            <button type="button"
+            class="inline-block px-6 font-semibold py-2.5 mt-3 bg-dark text-white  text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
+                Add Item
+            </button>
+        </a>
+    
+    
+            {% elif catagoryname == 'inorganic' %}
+            <a href="{% url 'inorganic:add'  %}">
+                <button type="button"
+                class="inline-block px-6 font-semibold py-2.5 mt-3 bg-dark text-white text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
+                    Add Item
+                </button>
+    
+            </a>
+    
+            {% elif catagoryname == 'solvents' %}
+            <a href="{% url 'solvents:add' %}">
+                <button type="button"
+                class="inline-block px-6 font-semibold py-2.5 mt-3 bg-dark text-white text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
+                    Add Item
+                </button>
+    
+            </a>
+            {% endif %}
+    
+            </a>
+        </div>
+    
+    </div>
+    {% include 'searchresults.html' %}
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+</div>
+{% endif %}
+{% endblock %}
